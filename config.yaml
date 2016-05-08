@@ -1,0 +1,9 @@
+name: maliblog
+version: 2
+handle:
+- rewrite: if (!is_file() && !is_dir() && path ~ "^/(.*)") goto "index.php/$1"
+- rewrite: if (  in_header["host"] ~ "cv.leonma.cn" && path ~ "^(?!wp-content/themes/prowerV6/cv/)(.*)" ) goto "wp-content/themes/prowerV6/cv/$1?%{QUERY_STRING}"
+- compress: if ( out_header["Content-type"] ~ "image/jpeg" ) compress
+- compress: if ( out_header["Content-type"] ~ "image/png" ) compress
+- compress: if ( out_header["Content-type"] ~ "text/javascript" ) compress
+- compress: if ( out_header["Content-type"] ~ "text/css" ) compress
